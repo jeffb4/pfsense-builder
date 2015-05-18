@@ -1,8 +1,5 @@
 # -*- mode: ruby; -*-
 
-Vagrant.require_plugin 'vagrant-aws'
-Vagrant.require_plugin 'nugrant'
-
 Vagrant.configure('2') do |config|
   config.vm.box_url = 'https://github.com/jeffb4/pfsense-builder/raw/master/boxes/freebsd-10.1-aws.box'
   config.vm.box = 'freebsd-10.1-aws'
