@@ -1,0 +1,29 @@
+---
+- hosts: all
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Set python location
+      set_fact:
+        ansible_python_interpreter: /usr/local/bin/python
+
+- hosts: all
+  sudo: true
+  tasks:
+    - name: Ensure git is installed
+      pkgng: name=git state=present
+    - name: Ensure fastest_cvsup is installed
+      pkgng: name=fastest_cvsup state=present
+    - name: Set make options for pfsense (WITHOUT_X11)
+      lineinfile: dest=/etc/make.conf regexp="^WITHOUT_X11" line="WITHOUT_X11=yes" create=yes
+    - name: Set make options for pfsense (OPTIONS_UNSET=X11)
+      lineinfile: dest=/etc/make.conf regexp="^OPTIONS_UNSET=X11$" line="OPTIONS_UNSET=X11"
+    - name: Set make options for pfsense (BATCH)
+      lineinfile: dest=/etc/make.conf regexp="^BATCH=" line="BATCH=yes"
+
+- hosts: all
+  sudo: false
+  tasks:
+    - name: Check out pfsense master HEAD
+      shell: git clone git@github.com:pfsense/pfsense.git
+
