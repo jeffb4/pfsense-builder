@@ -1,3 +1,4 @@
 aws:
   access_key: YOURAWSACCESSKEYHERE
   secret_key: YOURAWSSECRETKEYHERE
+  keypair_name: default
