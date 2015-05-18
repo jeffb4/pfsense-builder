@@ -8,6 +8,7 @@ Vagrant.configure('2') do |config|
   config.vm.synced_folder ".", "/vagrant", type: 'rsync'
 
   config.vm.provider :aws do |aws, override|
+    aws.tags = { 'Name' => 'pfsense-builder' }
     aws.access_key_id = config.user.aws.access_key
     aws.secret_access_key = config.user.aws.secret_key
     aws.keypair_name = config.user.aws.keypair_name
